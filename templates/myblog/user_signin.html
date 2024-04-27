@@ -1,0 +1,54 @@
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Signin Page</title>
+</head>
+
+<body>
+  <div>
+    {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <li>{{message}}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+  <div>
+    <form action="" method="post">
+      {% csrf_token %}
+      {{form.as_p}}
+
+      <!-- <div>
+        <label for="id_username">Username:</label>
+        <input type="text" name="username" id="id_username" />
+      </div>
+      <div>
+        <label for="id_password2">Password confirmation:</label>
+        <input type="password" name="pasword" id="id_password2" />
+      </div> -->
+      <!-- <div>
+        <label for="id_username">Username:</label>
+        <input type="text" name="username" id="id_username" />
+      </div>
+
+      <div>
+        <label for="id_password2">Password confirmation:</label>
+        <input type="password" name="password" id="id_password2" />
+      </div> -->
+
+      <div>
+        <button type="submit">Login</button>
+      </div>
+    </form>
+    <div>Dont have an account?
+      <span><a href={% url "user_signup" %}>Register</a></span>
+      for one
+    </div>
+  </div>
+</body>
+
+</html>
