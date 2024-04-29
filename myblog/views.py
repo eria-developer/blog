@@ -52,8 +52,10 @@ def user_signout(request):
 
 def home(request):
     username = request.user.username
+    blogs = models.Blog.objects.filter(author=request.user)
     context = {
         "username": username,
+        "blogs": blogs
     }
     return render(request, "myblog/home.html", context) 
 

@@ -15,5 +15,17 @@
 {% if request.user.is_authenticated %}
 {% else %}
 {% endif %}
+
+<h2>My Blogs</h2>
+{% for blog in blogs %}
+    <a href={% url "blog_details" slug=blog.slug %}>
+        <h2>{{ blog.title }}</h2>
+        {% if request.user == blog.author %}
+        <a href={% url "edit_blog" blog.slug%}>Edit Blog</a>
+        {% endif %}
+    </a>
+    <h4>Created: {{blog.created_at}}. Last Updated: {{blog.updated_at}}</h4>
+        <p>{{ blog.description|truncatechars:100 }}</p>
+    {% endfor %}
 {% endblock content %}
 
