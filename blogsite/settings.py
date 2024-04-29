@@ -117,3 +117,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # added configs 
 AUTH_USER_MODEL = "myblog.CustomUser"
+
+# Password reset 
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
