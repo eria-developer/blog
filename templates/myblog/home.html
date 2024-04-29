@@ -1,2 +1,16 @@
 <div>hey there</div>
 <button type="button"><a href={% url "user_signout" %}>logout</a></button>
+
+<div>My name is {{ username}}</div>, welcome to my blog-home
+
+<div>
+    <a href={% url "add_blog" %}>
+        <button>Add New Blog</button>
+    </a>
+    <a href={% url "blogs" %}>
+        <button>View All Blogs</button>
+    </a>
+</div>
+{% if request.user.is_authenticated %}
+{% else %}
+{% endif %}

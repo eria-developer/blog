@@ -4,6 +4,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from . import models
+from . import forms
 
 def user_signup(request):
     if request.method == "POST":
@@ -49,4 +50,33 @@ def user_signout(request):
 
 
 def home(request):
-    return render(request, "myblog/home.html")   
+    username = request.user.username
+    context = {
+        "username": username,
+    }
+    return render(request, "myblog/home.html", context) 
+
+
+def add_blog(request):
+    if request.method == "POST":
+        form = forms.AddBlogForm(request.POST)
+        if form.is_valid():
+            blog = form.save(commit=False)
+            blog.author = request.user
+            blog.save()
+            return redirect("home")
+    else:
+        form = forms.AddBlogForm()
+
+    context = {
+        "form": form,
+    }
+    return render(request, "myblog/add_blog.html", context)
+
+
+def blogs(request):
+    blogs = models.Blog.objects.all()
+    context = {
+        "blogs": blogs,
+    }
+    return render(request, "myblog/blogs.html", context)
