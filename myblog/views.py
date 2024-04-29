@@ -87,7 +87,7 @@ def blogs(request):
 
 
 def blog_details(request, slug):
-    blog = models.Blog.objects.filter(slug=slug)
+    blog = get_object_or_404(models.Blog, slug=slug)
     context = {
         "blog": blog,
     }
