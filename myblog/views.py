@@ -45,6 +45,7 @@ def user_signin(request):
     return render(request, "myblog/user_signin.html", context)
 
 
+@login_required(login_url="user_signin")
 def user_signout(request):
     logout(request)
     return redirect("user_signin")
@@ -65,7 +66,7 @@ def home(request):
     return render(request, "myblog/home.html", context) 
 
 
-@login_required(login_url="/user_signin")
+@login_required(login_url="user_signin")
 def add_blog(request):
     if request.method == "POST":
         form = forms.AddBlogForm(request.POST)
@@ -99,6 +100,7 @@ def blog_details(request, slug):
     return render(request, "myblog/blog_details.html", context)
 
 
+@login_required(login_url="user_signin")
 def edit_blog(request, slug):
     # blog_to_edit = models.Blog.objects.filter(slug=slug)
     blog_to_edit = get_object_or_404(models.Blog, slug=slug)
@@ -116,6 +118,7 @@ def edit_blog(request, slug):
     return render(request, "myblog/edit_blog.html", context)
 
 
+@login_required(login_url="user_signin")
 def delete_blog(request, slug):
     blog = get_object_or_404(models.Blog, slug=slug)
     blog.delete()
