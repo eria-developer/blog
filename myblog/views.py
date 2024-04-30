@@ -50,6 +50,10 @@ def user_signout(request):
     return redirect("user_signin")
 
 
+def index(request):
+    return render(request, "myblog/index.html")
+
+
 def home(request):
     username = request.user.username
     blogs = models.Blog.objects.filter(author=request.user)
