@@ -15,6 +15,7 @@ class Blog(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
     slug = models.SlugField(unique=True, blank=True, null=True)
+    photo = models.ImageField(upload_to="blog_uploaded_pics/", blank=True, null=True)
 
     def __str__(self):
         return f"{self.title} by {self.author.username}"

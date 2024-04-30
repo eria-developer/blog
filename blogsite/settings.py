@@ -115,8 +115,10 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# added configs 
+# ADDED CONFIGS
 AUTH_USER_MODEL = "myblog.CustomUser"
 
 # Password reset 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+STATIC_FILES_DIRS = os.path.join(BASE_DIR, "static")
+MEDIA_ROOT = "/media/"
