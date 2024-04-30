@@ -54,6 +54,7 @@ def index(request):
     return render(request, "myblog/index.html")
 
 
+@login_required(login_url="user_signin")
 def home(request):
     username = request.user.username
     blogs = models.Blog.objects.filter(author=request.user)
