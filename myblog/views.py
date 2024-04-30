@@ -79,7 +79,7 @@ def add_blog(request):
 
 
 def blogs(request):
-    blogs = models.Blog.objects.all()
+    blogs = models.Blog.objects.all().order_by("-created_at")
     context = {
         "blogs": blogs,
     }
@@ -109,3 +109,9 @@ def edit_blog(request, slug):
         "form": form,
     }
     return render(request, "myblog/edit_blog.html", context)
+
+
+def delete_blog(request, slug):
+    blog = get_object_or_404(models.Blog, slug=slug)
+    blog.delete()
+    return redirect("home")

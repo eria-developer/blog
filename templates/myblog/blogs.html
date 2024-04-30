@@ -10,7 +10,8 @@
     <a href={% url "blog_details" slug=blog.slug %}>
         <h2>{{ blog.title }}</h2>
         {% if request.user == blog.author %}
-        <a href={% url "edit_blog" blog.slug%}>Edit Blog</a>
+        <a href={% url "edit_blog" blog.slug%}><button>Edit Blog</button></a>
+        <a href={% url "delete_blog" blog.slug%}><button>Delete Blog</button></a>
         {% endif %}
     </a>
     <h4>BY: {{blog.author}}. Created: {{blog.created_at}}. Last Updated: {{blog.updated_at}}</h4>

@@ -7,4 +7,5 @@ urlpatterns = [
     path("blogs", views.blogs, name="blogs"),
     path("blog_details/<slug:slug>", views.blog_details, name="blog_details"),
     path("edit_blog/<slug:slug>", views.edit_blog, name="edit_blog"),
+    path("delete_blog/<slug:slug>", views.delete_blog, name="delete_blog")
 ]
