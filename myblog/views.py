@@ -58,7 +58,7 @@ def index(request):
 @login_required(login_url="user_signin")
 def home(request):
     username = request.user.username
-    blogs = models.Blog.objects.filter(author=request.user)
+    blogs = models.Blog.objects.filter(author=request.user).order_by("-created_at")
     context = {
         "username": username,
         "blogs": blogs
@@ -69,7 +69,7 @@ def home(request):
 @login_required(login_url="user_signin")
 def add_blog(request):
     if request.method == "POST":
-        form = forms.AddBlogForm(request.POST)
+        form = forms.AddBlogForm(request.POST, request.FILES)
         if form.is_valid():
             blog = form.save(commit=False)
             blog.author = request.user

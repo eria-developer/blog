@@ -121,4 +121,5 @@ AUTH_USER_MODEL = "myblog.CustomUser"
 # Password reset 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 STATIC_FILES_DIRS = os.path.join(BASE_DIR, "static")
-MEDIA_ROOT = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"

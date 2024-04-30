@@ -12,10 +12,10 @@ class CustomUserCreationForm(UserCreationForm):
 class AddBlogForm(ModelForm):
     class Meta:
         model = models.Blog
-        fields = ["title", "description"]
+        fields = ["title", "description", "photo"]
 
 
 class EditBlogForm(ModelForm):
     class Meta:
         model = models.Blog
-        fields = ["title", "description"]       
+        fields = ["title", "description", "photo"]       
