@@ -7,8 +7,10 @@
     <style>{% block extra_css %}{% endblock extra_css %}</style>
 </head>
 <body>
-    <button type="button"><a href={% url "home" %}>Home</a></button>
+{% if request.user.is_authenticated %}
+<button type="button"><a href={% url "home" %}>Home</a></button>
 <button type="button"><a href={% url "user_signout" %}>logout</a></button>
+{% endif %}
     {% block content %}{% endblock content %}
 </body>
 </html>
