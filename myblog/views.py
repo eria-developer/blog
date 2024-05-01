@@ -67,6 +67,33 @@ def home(request):
 
 
 @login_required(login_url="user_signin")
+def profile(request, id):
+    user = get_object_or_404(models.CustomUser, id=id)
+    context = {
+        "user": user,
+    }
+    return render(request, "myblog/profile.html", context)
+
+
+@login_required(login_url="user_signin")
+def edit_profile(request, id):
+    user = get_object_or_404(models.CustomUser, id=id)
+    if request.method == "POST":
+        form = forms.ProfileForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            user_profile = form.save(commit=False)
+            user_profile.user = request.user
+            user_profile.save()
+            return redirect("home")
+    else:
+        form = forms.ProfileForm(instance=user)
+    context = {
+        "form": form,
+    } 
+    return render(request, "myblog/edit_profile.html", context)
+
+
+@login_required(login_url="user_signin")
 def add_blog(request):
     if request.method == "POST":
         form = forms.AddBlogForm(request.POST, request.FILES)

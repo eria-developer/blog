@@ -9,6 +9,7 @@
 <body>
 {% if request.user.is_authenticated %}
 <button type="button"><a href={% url "home" %}>Home</a></button>
+<button type="button"><a href={% url "profile" id=user.id %}>My Profile</a></button>
 <button type="button"><a href={% url "user_signout" %}>logout</a></button>
 {% endif %}
     {% block content %}{% endblock content %}

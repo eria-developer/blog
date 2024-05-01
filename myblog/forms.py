@@ -18,4 +18,10 @@ class AddBlogForm(ModelForm):
 class EditBlogForm(ModelForm):
     class Meta:
         model = models.Blog
-        fields = ["title", "description", "photo"]       
+        fields = ["title", "description", "photo"]  
+
+
+class ProfileForm(ModelForm):
+    class Meta:
+        model = models.CustomUser
+        fields = ["website", "fullname", "bio", "photo"]     

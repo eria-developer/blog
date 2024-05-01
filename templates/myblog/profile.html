@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% block title %}My Profile{% endblock title %}
+{%block content %}
+
+<div>
+  <h3>Profile Picture:</h3>
+  {% if user.photo %}
+  <img
+    src="{{ user.photo.url }}"
+    alt="profile pic"
+    width="150px"
+    height="150px"
+  />
+  {% endif %}
+</div>
+
+<div>
+  <h3>Full Name:</h3>
+  <h5>{{ user.fullname }}</h5>
+</div>
+
+<div>
+  <h3>Website Url:</h3>
+  <h5>{{ user.website }}</h5>
+</div>
+
+<div>
+  <h3>Biography:</h3>
+  <h5>{{ user.bio }}</h5>
+</div>
+
+<div>
+  <a href='{% url "edit_profile" id=user.id%}'>
+    <button>Edit Profile</button>
+  </a>
+</div>
+
+{% endblock content %}

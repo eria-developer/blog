@@ -5,7 +5,14 @@ from django.utils.text import slugify
 
 
 class CustomUser(AbstractUser):
-    address = models.CharField(max_length=64)
+    address = models.CharField(max_length=64, blank=True, null=True)
+    fullname = models.CharField(max_length=64, blank=True, null=True)
+    photo = models.ImageField(upload_to="user_profile_pics", blank=True, null=True)
+    website = models.URLField(blank=True, null=True)
+    bio = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.username}"
 
 
 class Blog(models.Model):
