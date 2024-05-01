@@ -5,6 +5,16 @@
 {% block content %}
 
 <div>
+    <div style="margin: 30px 0px;">
+        {% if not request.user.is_authenticated %}
+        <a href={% url "user_signup" %}>
+            <button>Signup</button>
+        </a>
+        <a href={% url "user_signin" %}>
+            <button>Signin</button>
+        </a>
+        {% endif %}
+    </div>
     <h1>ALL BLOGS</h1>
     {% for blog in blogs %}
     <a href={% url "blog_details" slug=blog.slug %}>
