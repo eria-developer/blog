@@ -25,3 +25,9 @@ class ProfileForm(ModelForm):
     class Meta:
         model = models.CustomUser
         fields = ["website", "fullname", "bio", "photo"]     
+
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = models.Comment
+        fields = ["comment"]

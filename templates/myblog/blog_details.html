@@ -10,12 +10,12 @@
     {% if blog.photo %}
     <img src={{ blog.photo.url }} alt="blog image" width="400px" height="200px">
     {% endif %}
-    
+
     {% if request.user == blog.author %}
-        <a href={% url "edit_blog" blog.slug%}><button>Edit Blog</button></a>
-        <a href={% url "delete_blog" blog.slug%}><button>Delete Blog</button></a>
+    <a href={% url "edit_blog" blog.slug%}><button>Edit Blog</button></a>
+    <a href={% url "delete_blog" blog.slug%}><button>Delete Blog</button></a>
     {% endif %}
-    
+
     <p>{{ blog.description }}</p>
     <h3 style="margin-top: 30px;">Author Details:</h3>
     {% if blog.author.photo %}
@@ -24,9 +24,24 @@
     <h4>{{blog.author.fullname}}</h4>
     <h5>{{ blog.author.bio }}</h5>
 </div>
-<div>
-    <h2>Comments....</h2>
-    
+
+<div style="margin-top: 50px;">
+    <hr>
+    <h2 style="margin-bottom: 20px;">Comments....</h2>
+    <div style="margin-bottom: 10px;">
+        {% if comments %}
+        {% for comment in comments %}
+        <p><strong>{{comment.name.fullname}}</strong> on <strong style="margin-left: 40px;">
+                {{ comment.created_at}}</strong></p>
+        <p style="margin-right: 15px;">{{ comment.comment }}</p>
+        {% endfor %}
+        {% else %}
+        <p>This blog has no comments</p>
+        {% endif %}
+    </div>
+    <a href={% url "add_comment" slug=blog.slug %}>
+        <button>Add Comment</button>
+    </a>
 </div>
 
 {% endblock content %}

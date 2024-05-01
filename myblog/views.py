@@ -84,7 +84,7 @@ def edit_profile(request, id):
             user_profile = form.save(commit=False)
             user_profile.user = request.user
             user_profile.save()
-            return redirect("home")
+            return redirect("profile", id=id)
     else:
         form = forms.ProfileForm(instance=user)
     context = {
@@ -121,8 +121,10 @@ def blogs(request):
 
 def blog_details(request, slug):
     blog = get_object_or_404(models.Blog, slug=slug)
+    comments = models.Comment.objects.filter(blog=blog).order_by("-created_at")
     context = {
         "blog": blog,
+        "comments": comments
     }
     return render(request, "myblog/blog_details.html", context)
 
@@ -150,3 +152,23 @@ def delete_blog(request, slug):
     blog = get_object_or_404(models.Blog, slug=slug)
     blog.delete()
     return redirect("home")
+
+
+@login_required(login_url="user_signin")
+def add_comment(request, slug):
+    blog = get_object_or_404(models.Blog, slug=slug)
+    if request.method == "POST":
+        form = forms.CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.name = request.user
+            comment.blog = blog
+            comment.save()
+            return redirect("blog_details", slug=slug)
+    else:
+        form = forms.CommentForm()
+    context = {
+            "form": form,
+            "blog": blog,
+        }
+    return render(request, "myblog/add_comment.html", context)
